@@ -11,13 +11,17 @@ public class Main {
 //        users.forEach(System.out::println);
 //        users.forEach(user -> System.out.println(user.name()));
 
-        users.stream()
+        List<User> malesSortedByAge = users.stream()
                 .filter(user -> !user.name().endsWith("a"))
                 .sorted(Comparator.comparing(User::age))
-                //.takeWhile(user-> user.age() < 35)
-                .dropWhile(user -> user.age() < 35)
-                .forEach(user -> System.out.println(user.name() + ", " + user.age())
-                );
+                .toList();
+
+        System.out.println(malesSortedByAge.size());
+        malesSortedByAge.forEach(System.out::println);
+
+        //.takeWhile(user-> user.age() < 35)
+                //.dropWhile(user -> user.age() < 35)
+                //.forEach(user -> System.out.println(user.name() + ", " + user.age()));
 
 
     }
