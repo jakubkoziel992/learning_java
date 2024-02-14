@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -22,14 +23,22 @@ public class Main {
                 //.dropWhile(user -> user.age() < 35)
                 //.forEach(user -> System.out.println(user.name() + ", " + user.age()));
         //mapping
-        List<String> names = users.stream()
-                .filter(user -> !user.name().endsWith("a"))
-                .sorted(Comparator.comparing(User::age))
-                //.map(User::name)
-                .map(user -> user.name() + ", " + user.age())
+//        List<String> names = users.stream()
+//                .filter(user -> !user.name().endsWith("a"))
+//                .sorted(Comparator.comparing(User::age))
+//                //.map(User::name)
+//                .map(user -> user.name() + ", " + user.age())
+//                .toList();
+//
+//        names.forEach(System.out::println);
+     //flattening of lists
+        List<String> skills = users.stream()
+                .sorted(Comparator.comparing(User::name))
+                .map(User::skills)
+                .flatMap(Collection::stream)
                 .toList();
+        skills.forEach(System.out::println);
 
-        names.forEach(System.out::println);
 
     }
 
