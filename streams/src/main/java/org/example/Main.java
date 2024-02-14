@@ -11,18 +11,25 @@ public class Main {
 //        users.forEach(System.out::println);
 //        users.forEach(user -> System.out.println(user.name()));
 
-        List<User> malesSortedByAge = users.stream()
-                .filter(user -> !user.name().endsWith("a"))
-                .sorted(Comparator.comparing(User::age))
-                .toList();
-
-        System.out.println(malesSortedByAge.size());
-        malesSortedByAge.forEach(System.out::println);
+//        List<User> malesSortedByAge = users.stream()
+//                .filter(user -> !user.name().endsWith("a"))
+//                .sorted(Comparator.comparing(User::age))
+//                .toList()
+//        System.out.println(malesSortedByAge.size());
+//        malesSortedByAge.forEach(System.out::println);
 
         //.takeWhile(user-> user.age() < 35)
                 //.dropWhile(user -> user.age() < 35)
                 //.forEach(user -> System.out.println(user.name() + ", " + user.age()));
+        //mapping
+        List<String> names = users.stream()
+                .filter(user -> !user.name().endsWith("a"))
+                .sorted(Comparator.comparing(User::age))
+                //.map(User::name)
+                .map(user -> user.name() + ", " + user.age())
+                .toList();
 
+        names.forEach(System.out::println);
 
     }
 
