@@ -1,9 +1,8 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,16 +31,36 @@ public class Main {
 //
 //        names.forEach(System.out::println);
      //remove duplicate
-        List<String> skills = users.stream()
-                .map(User::skills)
-                .flatMap(Collection::stream)
-                .distinct()
-                //.sorted()
-                .sorted(Comparator.reverseOrder())
-                .toList();
-        skills.forEach(System.out::println);
+//        List<String> skills = users.stream()
+//                .map(User::skills)
+//                .flatMap(Collection::stream)
+//                .distinct()
+//                //.sorted()
+//                .sorted(Comparator.reverseOrder())
+//                .toList();
+//        skills.forEach(System.out::println);
+
+        //write to list, set, map
+//        Set<String> skills = users.stream()
+//                .map(User::skills)
+//                .flatMap(Collection::stream)
+//                .collect(Collectors.toSet());
+//        skills.forEach(System.out::println);
+
+        Country country = new Country("Poland", "Warsaw");
+        Country country1 = new Country("Germany", "Berlin");
+        Country country2 = new Country("France", "Paris");
+        Country country3 = new Country("Poland", "Krakow");
 
 
+        List<Country> countries = List.of(country, country1, country2,country3);
+
+        Map<String, String> countriesAndCapitals = countries.stream()
+                .collect(Collectors.toMap(Country::country,Country::capital,(oldValue,newValue)->newValue));
+                //.collect(Collectors.toMap(Country::country, Country::capital));
+
+
+        System.out.println(countriesAndCapitals.get("Poland"));
     }
 
     private static List<User> prepareData() {
