@@ -31,11 +31,13 @@ public class Main {
 //                .toList();
 //
 //        names.forEach(System.out::println);
-     //flattening of lists
+     //remove duplicate
         List<String> skills = users.stream()
-                .sorted(Comparator.comparing(User::name))
                 .map(User::skills)
                 .flatMap(Collection::stream)
+                .distinct()
+                //.sorted()
+                .sorted(Comparator.reverseOrder())
                 .toList();
         skills.forEach(System.out::println);
 
